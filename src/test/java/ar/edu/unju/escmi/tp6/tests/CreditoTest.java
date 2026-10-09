@@ -92,6 +92,5 @@ private List<Detalle> crearListaDetalles() {
 
     return listaDetalles;
 }
-```
 
 }
