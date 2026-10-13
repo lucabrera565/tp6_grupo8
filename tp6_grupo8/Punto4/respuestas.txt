@@ -1,0 +1,15 @@
+a) No se dibuja esa línea porque ya está implícita en el propio atributo de CollectionProducto: tener productos : List<Producto> como campo de la clase ya es, en sí mismo, la representación de la agregación. Ponerle además una flecha sería repetir la misma información dos veces en el diagrama.
+
+b) Factura tiene 4 atributos: fecha, nroFactura, cliente y detalles.
+
+c) Composición. La lista detalles vive adentro de Factura y no tiene sentido fuera de ella — si se borra la factura, sus detalles se van con ella.
+
+d) Asociación. Cada Factura tiene un único Cliente (el campo cliente), pero un mismo cliente puede tener muchas facturas a lo largo del tiempo — por eso en el diagrama la multiplicidad queda 1 a 0..*.
+
+e) Porque el rol de las clases Collection* no es encapsular datos, sino actuar como un repositorio global al que cualquier otra clase necesita acceder directamente durante toda la ejecución (por eso también son static). Si tuvieran getters/setters privados estarían agregando una capa de protección que no aporta nada acá, porque de última su único trabajo es guardar y devolver listas.
+
+f) En CollectionCliente tienen tres métodos:
+
+precargarClientes(): público, estático, no recibe parámetros ni devuelve nada. Solo carga los clientes iniciales, y únicamente si la lista está vacía (para no duplicar al llamarlo de nuevo).
+agregarCliente(Cliente cliente): público, estático, recibe un Cliente, no devuelve nada. Usa try-catch para no cortar el programa si falla el agregado.
+buscarCliente(long dni): público, estático, recibe el DNI y devuelve el Cliente encontrado o null si no existe. Recorre la lista con un for y también está envuelto en try-catch.
